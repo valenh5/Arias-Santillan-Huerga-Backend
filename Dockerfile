@@ -8,7 +8,7 @@ RUN npm install
 COPY . . 
 
 RUN npm install -g typescript
-RUN tsc # Corre el compilador de TypeScript
+RUN tsc 
 
 FROM node:18-alpine
 
