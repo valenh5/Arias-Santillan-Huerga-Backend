@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 app.use('/telefonos', telefonoRoutes);
 app.use("/usuarios", usuariosRoutes);
 
-
 app.get("/perfil", authenticateToken, (req, res) => {
   res.json({ message: "Bienvenido al perfil", user: (req as any).user });
 });
