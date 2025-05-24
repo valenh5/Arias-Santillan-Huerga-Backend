@@ -60,6 +60,6 @@ export const comprobarUsuario = async (req: Request, res: Response): Promise<voi
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ mensaje: 'Error al registrar usuario' });
+    res.status(500).json({ mensaje: 'Error al ingresar al usuario' });
   }
 };
