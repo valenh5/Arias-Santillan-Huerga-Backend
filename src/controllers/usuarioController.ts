@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Usuario } from '../models/usuarios';
 import bcrypt from 'bcrypt';
+
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = 'uavdocx'; // igual q middleware
@@ -9,6 +10,7 @@ const SECRET_KEY = 'uavdocx'; // igual q middleware
 
 export const registrarUsuario = async (req: Request, res: Response): Promise<void> => {
   console.log('Datos recibidos en registro:', req.body);
+
   const { nombre_usuario, contrasenia } = req.body;
 
   if (!nombre_usuario || !contrasenia) {
@@ -26,16 +28,19 @@ export const registrarUsuario = async (req: Request, res: Response): Promise<voi
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(contrasenia, saltRounds);
 
+
     const nuevoUsuario = await Usuario.create({ nombre_usuario, contrasenia: hashedPassword });
 
     res.status(201).json({ mensaje: 'Usuario registrado con éxito', usuario: nuevoUsuario });
   } catch (error: any) {
     console.error('Error en registrarUsuario:', error);
     res.status(500).json({ mensaje: 'Error al registrar usuario', error: error.message || error });
+
   }
 };
 
 export const comprobarUsuario = async (req: Request, res: Response): Promise<void> => {
+
   const { usuario_ingreso, pass_ingreso } = req.body;
 
   if (!usuario_ingreso || !pass_ingreso) {
@@ -69,5 +74,6 @@ export const comprobarUsuario = async (req: Request, res: Response): Promise<voi
   } catch (error) {
     console.error(error);
     res.status(500).json({ mensaje: 'Error al ingresar al usuario' });
+
   }
 };
